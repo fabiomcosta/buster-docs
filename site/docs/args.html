@@ -46,8 +46,8 @@ args.<a href="#handle">handle</a>(process.argv.slice(2), function (errors) {
     // Various useful ways to get the  values from the options.
     verbose.<a href="#timesSet">timesSet</a>; // Will be between 0 and 3.
     port.<a href="#isSet">isSet</a>;
-    port.<a href="#value">value</a>();
-    rootPath.<a href="#value">value</a>();
+    port.<a href="#value">value</a>;
+    rootPath.<a href="#value">value</a>;
 });
 </code></pre>
   <div class="section">
@@ -99,7 +99,7 @@ args.handle(process.argv.slice(2), function (errors) {
         return;
     }
     // Continue with normal operation. I.e. myOpt.hasValue,
-    // myOpt.timesSet, otherOpt.value(), etc.
+    // myOpt.timesSet, otherOpt.value, etc.
 });</code></pre>
   </div>
   <div class="section">
@@ -145,7 +145,7 @@ args.handle(process.argv.slice(2), function (errors) {
     <p>Adds a validator to an argument.</p>
     <h3 id="isSet"><code>var bool = opt.isSet</code></h3>
     <p>True or false depending on whether or not the option was present in argv.</p>
-    <h3 id="value"><code>var val = opt.value()</code></h3>
+    <h3 id="value"><code>var val = opt.value</code></h3>
     <p>
       The value of the argument. Is normally a string, but may be any object
       since validators can change argument values as they see
@@ -173,7 +173,7 @@ args.handle(process.argv.slice(2), function (errors) {
       on the file system.
     </p>
     <pre><code>myOpt.operation = function (promise) {
-    fs.readFile(myOpt.value(), function (err, data) {
+    fs.readFile(myOpt.value, function (err, data) {
         if (err) {
             promise.reject(err.message);
         } else {
@@ -328,7 +328,7 @@ buster.args.validators.required("${1} has to be set");</code></pre>
   </p>
   <pre><code>var opt = args.createOption("-v");
 opt.addValidator(function () {
-    if (this.value() == "can not be this value") {
+    if (this.value == "can not be this value") {
         return "This is the error message.";
     }
 });</code></pre>
@@ -341,13 +341,13 @@ opt.addValidator(function () {
 opt.addValidator(function () {
     var self = this;
     var deferred = when.defer();
-    fs.stat(this.value(), function (err, stat) {
+    fs.stat(this.value, function (err, stat) {
         if (err) {
             deferred.resolver.reject("Unknown error: " + err);
         }
 
         if (stat.size > 1024) {
-            deferred.resolver.reject(self.value() + " (" + self.signature + ") was larger than 1MB");
+            deferred.resolver.reject(self.value + " (" + self.signature + ") was larger than 1MB");
         } else {
             deferred.resolver.resolve();
         }
