@@ -19,20 +19,34 @@
   docs</a> or file feature requests so we can improve documentation. Docs are
   behind on some things, but we're working on it.
 </p>
-<h2>Summary</h2>
+
+<h2>Breaking changes</h2>
+
+<p>This is a list of breaking changes in this release. Since we haven't reached 1.0 stable yet, we're changing APIs without making them backwards compatible.</p>
+
+<h3>Config files can no longer read files outside of <code>rootPath</code></h3>
+
+<p>Configuration file loading is revamped (most importantly, <a href="/docs/resources/">buster-resources</a> was completely rewritten).</p>
+
+<p><code>sources</code>, <code>tests</code> etc can no longer contain paths outside the root path. The root path defaults to the path the configuration file is in. You can also provide the <code>rootPath</code> property in the configuration file to base the project outside the directory where the configuration file is located.</p>
+
+<pre><code>config["My tests"] = {
+    sources: ["../src/**/*.js"], // Will not work!
+    tests: ["**/*-test.js"]
+};
+
+config["My tests"] = {
+    rootPath: "../", // Will work (or just move the config file up one folder)
+    sources: ["src/**/*.js"],
+    tests: ["tests/**/*-test.js"]
+};</code></pre>
+
+<h2>Changes</h2>
 <ul>
   <li>Stronger Node.JS inferences across the board.</li>
   <li>
     <a href="/docs/capture-server/">Capture server</a>: significant
     refactor. "Clients" are now "slaves" and several URLs have changed.
-  </li>
-  <li>
-    Configuration file loading is revamped (most importantly,
-    <a href="/docs/resources/">buster-resources</a> was completely rewritten).
-    <code>sources</code>, <code>tests</code> etc can no longer contain paths
-    outside the root path. Instead, you can now provide the <code>rootPath</code>
-    property in the configuration file to base the project outside the directory
-    where the configuration file is located.
   </li>
   <li>
     Configuration file can now load <a href="/docs/extensions/">extensions</a>.
