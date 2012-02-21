@@ -221,26 +221,22 @@ config["Browser integration tests"] = {
       <dt><code>extensions</code></dt>
       <dd>
         <p>
-          Extensions to load at runtime. The value is an array of strings
-          understood by the <a href="/docs/module-loader/">buster-module-loader</a> which will be pinged when the
-          configuration is loaded. In most cases, these strings will be names of
-          installed NPM packages. If you are interested in developing extensions,
-          check out <a href="#events">events</a> and the
-          <a href="/docs/extensions/">extensions page</a> (which also
+          Extensions to load at runtime. The value is an array of extension
+          objects which will be pinged when the configuration is loaded. If you
+          are interested in developing extensions, check
+          out <a href="/#events">events</a> and the
+          <a href="../extensions/">extensions page</a> (which also
           lists known extensions).
         </p>
         <p>
-          To configure an extension, provide an object in place of a string. The
-          object should have the extension identifier as keys and an object of
-          options as values:
+          To configure an extension, add settings under the name of the
+          extension:
         </p>
         <pre><code>config["Browser integration tests"] = {
-    extensions: [
-        "buster-jstestdriver",
-        { "buster-coverage": {
-            "outputDirectory": "coverage"
-        }}
-    ]
+    extensions: [require("buster-jstestdriver"), require("buster-coverage")],
+    "buster-coverage": {
+        "outputDirectory": "coverage"
+    }
 };</code></pre>
       </dd>
     </dl>
