@@ -9,3 +9,16 @@
 <p>We're renaming some of our expectations, the intent is basically to match the expectations in Jasmine since that's what people are used to, and since they have good well thought out names.</p>
 
 <p>TODO: Add list of changes. Issue 91</p>
+
+<h2>Changes</h2>
+
+<ul>
+  <li>Fixed some bugs in server proxying for browser tests (<a href="https://github.com/busterjs/buster/issues/57">#57</a>)</li>
+
+https://github.com/busterjs/buster/issues/77#issuecomment-4063479
+<a href="https://github.com/busterjs/buster/issues/69">#69</a>
+
+  <li>Bug: Browser tests now fail when a test times out when there are successful tests in the same test run. (<a href="https://github.com/busterjs/buster/issues/77">#77</a>)</li>
+  <li>Bug: Browser tests now fail when there's no assertions in a test. (<a href="https://github.com/busterjs/buster/issues/69">#69</a>)</li>
+  <li>At some point in time, an unknown change fixed a small problem with <code>assert.calledOnce</code>. Nobody knows what, where and why. (<a href="https://github.com/busterjs/buster/issues/70">#70</a>)</li>
+</ul>
