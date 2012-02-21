@@ -1,0 +1,64 @@
+<h1>Buster.JS Beta 2</h1>
+<p>
+  This is a brief (i.e. not exhaustive) overview of changes from Beta 1. Beta 2
+  introduces quite a few fundamental refactorings and rewrites, and is
+  significantly closer to a stable 1.0 release than its predecessor.
+</p>
+<p>
+  With Beta 2, we've entered a more rapid iterative development and release
+  cycle. In the four days since the initial release, three patch updates have
+  already been shipped. "Beta 2" refers to Buster.JS version 0.4.1 or newer,
+  until we decide to do a release candidate (or another major beta, if
+  necessary).
+</p>
+<h2>Problems?</h2>
+<p>
+  Please <a href="https://github.com/busterjs/buster/issues">report as many
+  issues</a> as you can, and
+  consider <a href="https://github.com/busterjs/buster-docs">contributing
+  docs</a> or file feature requests so we can improve documentation. Docs are
+  behind on some things, but we're working on it.
+</p>
+<h2>Summary</h2>
+<ul>
+  <li>Stronger Node.JS inferences across the board.</li>
+  <li>
+    <a href="/docs/capture-server/">Capture server</a>: significant
+    refactor. "Clients" are now "slaves" and several URLs have changed.
+  </li>
+  <li>
+    Configuration file loading is revamped (most importantly,
+    <a href="/docs/resources/">buster-resources</a> was completely rewritten).
+    <code>sources</code>, <code>tests</code> etc can no longer contain paths
+    outside the root path. Instead, you can now provide the <code>rootPath</code>
+    property in the configuration file to base the project outside the directory
+    where the configuration file is located.
+  </li>
+  <li>
+    Configuration file can now load <a href="/docs/extensions/">extensions</a>.
+    A few are already availble, and others, like <a href="https://github.com/busterjs/buster/issues/15">buster-amd</a>
+    and coverage is right around the corner.
+  </li>
+  <li>
+    buster-promise is now deprecated and will not receive further updates. We
+    recommend the wonderful <a href="https://github.com/cujojs/when">when.js</a>
+    instead &emdash; it's what we use.
+  </li>
+  <li>
+    Buster now syntax checks files before attempting to run tests in browsers. This
+    ensures a stable environment with good feedback, regardless of target browser.
+  </li>
+  <li>
+    The test runner was rewritten. It now supports per-test timeouts, the done
+    callback can be used to wrap functions ("we're done when this function is
+    called"), asynchronous <code>testCase</code> and <code>describe</code>,
+    TeamCity reporter.
+  </li>
+  <li>
+    The test runner now has a system for including other measures in a test run,
+    issuing warnings, or even preventing tests from running at all. The first
+    external tool included in this system
+    is <a href="/docs/extensions/#lint">buster-lint</a>. Expect more thorough
+    documentation of this system as it evolves.
+  </li>
+</ul>
