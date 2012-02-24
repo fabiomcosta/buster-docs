@@ -46,6 +46,7 @@ function renderTemplate(pathname, content) {
     var menu = [
         {href: "/", text: "Home"},
         {href: "/docs/", text: "Documentation", matcher: /^\/docs/},
+        {href: "/download/", text: "Download", matcher: /^\/download/},
         {href: "/community/", text: "Community"}
     ];
 
