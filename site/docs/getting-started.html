@@ -1,39 +1,57 @@
 <h1>Getting Started</h1>
 <p>
   This guide walks you through installation and very basic setup of tests in a
-  project.
+  project. If you're only interested in simple browser tests embedded in a web page,
+  see the <a href="/docs/browser-testing/">browser testing page</a>.
 </p>
 <h2>Installing</h2>
 <p>
-  To run Buster.JS we recommend Node 0.6.3 or newer and NPM. Node 0.6.3 and
-  newer comes with NPM bundled.
+  Buster.JS on the command-line requires Node 0.6.3 or newer and NPM. Node 0.6.3
+  and newer comes with NPM bundled on most platforms.
 </p>
 <h3>OS X</h3>
 <ol>
-  <li>Get the latest Node installer from <a href="http://nodejs.org/">nodejs.org</a>. You need Node 0.6.3 or newer.</li>
-  <li><kbd>sudo npm install -g buster</kbd></li>
+  <li>
+    Get the latest Node installer
+    from <a href="http://nodejs.org/">nodejs.org</a>. You need Node 0.6.3 or
+    newer.
+  </li>
+  <li><kbd>npm install -g buster</kbd></li>
 </ol>
+<p>
+  <strong>Note:</strong> installing <code>npm</code> pacakges with
+  <kbd>sudo</kbd> causes multiple problems, and is not recommended. If you
+  cannot use npm without sudo after using the installer, try changing ownership
+  of the node installation to your user.
+</p>
 <h3>Linux</h3>
 <ol>
-  <li>Install Node 0.6.3 or later with your favorite package manager. If you don't have one, follow <a href="https://github.com/joyent/node/wiki/Installation">these simple build instructions.</a></li>
+  <li>
+    Install Node 0.6.3 or later with your favorite package manager. If you don't
+    have one, follow <a href="https://github.com/joyent/node/wiki/Installation">these
+    simple build instructions</a>.
+  </li>
   <li><kbd>npm install -g buster</kbd></li>
 </ol>
 <h3>Windows</h3>
-<p>Unfortunately Buster.JS support for Windows is unconfirmed at this time.</p>
 <p>
-  As far as we know, the glob module is our only obstacle for your Windows
-  JavaScript testing pleasure. Windows support is a priority and will land soon.
+  Windows support is right around the corner. Hang in there.
 </p>
 <h2>Create config file</h2>
-<p>Add a config file to your project. Call it <tt>test/buster.js</tt> or <tt>spec/buster.js</tt>, so you don't have to specify <kbd>--config</kbd> every time you run tests.</p>
+<p>
+  Add a config file to your project. Call it <tt>test/buster.js</tt>
+  or <tt>spec/buster.js</tt>. This way you don't have to tell Buster about it
+  with <kbd>--config</kbd> every time you run tests. <tt>./buster.js</tt> will
+  also be recognized.
+</p>
 <pre><code>var config = module.exports;
 
 config["My tests"] = {
     rootPath: "../",
-    environment: "browser",        // or "node"
+    environment: "browser", // or "node"
     sources: [
-        "lib/mylib.js", // Paths are relative to config file
-        "lib/**/*.js"   // Glob patterns supported
+        "lib/mylib.js",
+        "lib/**/*.js"
     ],
     tests: [
         "test/*-test.js"
@@ -51,7 +69,13 @@ config["My tests"] = {
   Read the full <a href="/docs/configuration/">buster-configuration</a>
   documentation for details.
 </p>
-<p>All the paths are relative to the config file itself.</p>
+<p>
+  Note that you may not "dot out" in <code>sources</code>, <code>tests</code>
+  etc. Paths are resolved relative to the directory where the configuration file
+  lives. If your sources live outside this directory, adjust the root directory
+  using the <code>rootPath</code> property (which is also resolved against the
+  config file location, unless absolute).
+</p>
 <h2>Write tests</h2>
 <p>
   Given the config file above, all files named <em>something</em>-test.js in the
@@ -93,12 +117,17 @@ buster.testCase("A module", {
   the <a href="/docs/sinon/">sinon-buster</a> module.
 </p>
 <h2>Run tests</h2>
-<p>When you have a config file, you're ready to run tests.</p>
 <h3>Node tests</h3>
 <p>
-  For Node tests, you don't need any additional setup. Open a terminal, go to
-  your project, and type in <kbd>buster test</kbd>. Here's the output from the
-  test run of <a href="/docs/args/">buster-args</a>.
+  Node tests can be run by simply typing <kbd>node test/some-test.js</kbd>.
+  Doing this requires nothing more than a file with tests (i.e. you don't need
+  the above configuration).
+</p>
+<p>
+  While <kbd>node test/my-test.js</kbd> is nice and convenient, you want to use
+  the <code>buster-test</code> binary to get at the full power of Buster. Open a
+  terminal, <kbd>cd</kbd> to your project, and type in <kbd>buster test</kbd>.
+  Here's the output from the test run of <a href="/docs/args/">buster-args</a>:
 </p>
 <p><img src="/images/node-testing/buster-test-node.png" width="633" height="382"></p>
 <p>See the <a href="/docs/node-testing/">Node testing</a> documentation for more.</p>
@@ -129,18 +158,16 @@ buster.testCase("A module", {
   You have to manually make sure your test cases and source files are able to
   run in both browsers and Node. Here's an example:
 </p>
-<pre><code>(function(){
-    if (typeof require != "undefined") {
-        var buster = require("buster");
-        var myLib = require("../lib/my-lib");
-    }
-}());
+<pre><code>if (typeof require != "undefined") {
+    var buster = require("buster");
+    var myLib = require("../lib/my-lib");
+}
 
 buster.testCase("A test case", {
     "test it": function () {
         assert(true);
     }
-})</code></pre>
+});</code></pre>
 <p>
   See the <a href="/docs/hybrid-testing/">hybrid testing</a> documentation for more.
 </p>

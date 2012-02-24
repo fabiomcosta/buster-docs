@@ -1,18 +1,45 @@
-Browser testing
-<p class="warning">
-  Note: this document is work in progress
+<h1>Browser testing</h1>
+<p>
+  Buster.JS offers multiple ways of running your tests in browsers. This
+  document describes three ways, ranging from simple setup to most useful (if
+  that's a scale).
+</p>
+<h2 id="html-file">Using an HTML scaffold</h2>
+<p>
+  The simplest way to try Buster is to copy the following code, save it to a
+  file and run it in a browser:
+</p>
+<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+           "http://www.w3.org/TR/html4/strict.dtd">
+&lt;html>
+  &lt;head>
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8">
+    &lt;title>strftime&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;script type="text/javascript" src="http://busterjs.org/releases/latest/buster-test.js">&lt;/script>
+    &lt;script type="text/javascript" src="http://busterjs.org/examples/strftime/strftime.js">&lt;/script>
+    &lt;script type="text/javascript" src="http://busterjs.org/examples/strftime/strftime-test.js">&lt;/script>
+  &lt;/body>
+&lt;/html></code></pre>
+<p>Go ahead, <a href="/examples/strftime/">try it</a>.</p>
+<p>
+  If you use Git, you can clone <a href="https://gist.github.com/1904218">this
+  example</a> to your machine:<br>
+  <code>git clone git://gist.github.com/1904218.git gist-1904218</code>
 </p>
 <p>
-  Buster.JS provides three methods for browser
-  testing: <a href="#buster-server">buster
-  server</a>, <a href="#buster-static">buster static</a>,
-  and <a href="#phantomjs">headless PhantomJS</a>.
+  <strong>Note:</strong> If you opt for downloading the script locally, remember
+  to get <a href="/releases/latest/buster-test.css">CSS-file</a> too.
+<p>
+  When using the pre-built library, there's no installation, but you also miss
+  out on much of the automation sweetness.
 </p>
 <h2 id="buster-server">Running with <kbd>buster server</kbd></h2>
 <p>
-  Inspired by our ancestor JsTestDriver, Buster.JS is able to automate browsers
-  seamlessly and provide feedback anywhere you want, making running your tests
-  in actual browsers easy and painless.
+  Inspired by JsTestDriver, Buster.JS can automate browsers seamlessly and
+  provide feedback anywhere you want, making running your tests in actual
+  browsers easy and painless. Hell, it even makes it fun.
 </p>
 <p>
   <img src="/images/docs/overview/buster-server-start.png" width="633" height="382">
@@ -23,15 +50,15 @@ Browser testing
 <p>
   <img src="/images/docs/overview/buster-test-run-browsers.png" width="633" height="382">
 </p>
-<h2 id="buster-server">Running with <kbd>buster static</kbd></h2>
+<h2 id="buster-static">Running with <kbd>buster static</kbd></h2>
 <p>
-  In the cases where you need a simpler method for running tests, Buster.JS has
-  a straightforward HTML page based test runner, similar to QUnit and other
-  traditional test frameworks.
+  In the cases where you need a simpler method for running tests, but don't care
+  for the manual HTML scaffold, Buster.JS can serve the scaffold for your based on
+  your configuration.
 </p>
 <p><img src="/images/docs/overview/buster-static-start.png" width="529" height="348"></p>
 <p><img src="/images/docs/overview/buster-static-success.png", width="514" height="470"></p>
 <h2 id="phantomjs">Running headless with PhantomJS</h2>
 <p class="warning">
-  Note: this feature has not yet landed in the beta.
+  This feature has not yet landed in the beta.
 </p>

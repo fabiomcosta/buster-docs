@@ -65,36 +65,46 @@ function notFound(res) {
     res.end();
 }
 
+function tryFile(res, path, callback) {
+    fs.stat(path, function (err, stat) {
+        if (!err && stat.isFile()) {
+            serveFile(path, res);
+            callback();
+        } else {
+            callback(err || { message: path + " is not a file" });
+        }
+    });
+}
+
+function tryTemplate(res, path, urlPath, callback) {
+    fs.stat(path, function (err, stat) {
+        if (!err && stat.isFile()) {
+            serveTemplate(path, urlPath, res);
+            callback();
+        } else {
+            callback(err || { message: path + " is not a file" });
+        }
+    });
+}
+
 var server = http.createServer(function (req, res) {
     var u = url.parse(req.url);
-    var pubFilePath = path.join(PUBLIC, u.pathname);
-    fs.stat(pubFilePath, function (err, stat) {
-        if (err || !stat.isFile()) {
-            var dirPath = path.join(SITE, u.pathname);
-            fs.stat(dirPath, function (err, stat) {
-                if (!err && stat.isDirectory()) {
-                    var indexHtmlPath = path.join(dirPath, "index.html");
-                    fs.stat(indexHtmlPath, function (err, stat) {
-                        if (err || !stat.isFile()) {
-                            notFound(res);
-                        } else {
-                            serveTemplate(indexHtmlPath, u.pathname, res);
-                        }
-                    });
-                } else {
-                    var templatePath = dirPath.slice(0, dirPath.length - 1) + ".html";
-                    fs.stat(templatePath, function (err, stat) {
-                        if (!err && stat.isFile()) {
-                            serveTemplate(templatePath, u.pathname, res);
-                        } else {
-                            notFound(res);
-                        }
-                    });
-                }
+
+    tryFile(res, path.join(PUBLIC, u.pathname).replace(/\/$/, ".html"), function (err) {
+        if (!err) { return; }
+
+        tryFile(res, path.join(PUBLIC, u.pathname, "index.html"), function (err) {
+            if (!err) { return; }
+
+            tryTemplate(res, path.join(SITE, u.pathname).replace(/\/$/, ".html"), u.pathname, function (err) {
+                if (!err) { return; }
+
+                tryTemplate(res, path.join(SITE, u.pathname, "index.html"), u.pathname, function (err) {
+                    if (!err) { return; }
+                    notFound(res);
+                });
             });
-        } else {
-            serveFile(pubFilePath, res);
-        }
+        });
     });
 });
 
