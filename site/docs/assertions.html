@@ -1285,7 +1285,7 @@ buster.assertions.add("isFoo", {
     },
     assertMessage: "Expected ${0} to be foo!",
     refuteMessage: "Expected not to be foo!",
-    expect: "toBeFoo"
+    expectation: "toBeFoo"
 });
 
 // Now you can do:
@@ -1317,7 +1317,7 @@ expect("foo").toBeFoo();</code>
     },
     assertMessage: "Expected ${0} (${actualType}) to be string",
     refuteMessage: "Expected not to be string",
-    expect: "toBeString"
+    expectation: "toBeString"
 });
 </code></pre>
             <h4>Arguments</h4>
@@ -1387,7 +1387,7 @@ expect("foo").toBeFoo();</code>
     return [actual, expected, typeof actual];
 }</code></pre>
     </dd>
-    <dt><code>expect</code></dt>
+    <dt><code>expectation</code></dt>
     <dd>
       The name of the assertion as an expectation,
       e.g. "toBeSomething". Optional.
@@ -1455,4 +1455,3 @@ buster.isArguments([]); // false</code></pre>
   </p>
 </div>
 </div>
-
