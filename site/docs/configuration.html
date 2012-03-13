@@ -152,9 +152,9 @@ config["Browser tests"] = {
           Additional resources that will be made available for test runs, but not
           explicitly loaded. Value is an array of resources. Resources are served
           from a context path on the server. To request a resource in your test
-          runs, you need to scope resource paths with <code>buster.env.path</code>.
+          runs, you need to scope resource paths with <code>buster.env.contextPath</code>.
           The resource <code>/some/cookies.json</code> can be requested as
-          <code>jQuery.get(buster.env.path + "/some/cookies.json");</code>
+          <code>jQuery.get(buster.env.contextPath + "/some/cookies.json");</code>
         </p>
         <p>
           A resource can be a string, i.e. a glob pattern/file name, or an object.
@@ -432,7 +432,7 @@ config.resolveGroups(function (err, groups) {
 };</code></pre>
         <p>
           With this configuration, a request to
-          <code>buster.env.path + "/todo-items/2"</code> would be proxyed to
+          <code>buster.env.contextPath + "/todo-items/2"</code> would be proxyed to
           <code>"http://localhost:8000/todo/todo-items/2"</code>
         </p>
       </dd>
