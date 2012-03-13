@@ -1,14 +1,44 @@
 <h1>Developers</h1>
+
 <p>This page contains useful information for Buster.JS developers/contributors.</p>
-<h2>Setting up the git repositories</h2>
-<p>
-  The following will clone all the repositories, symlink in the internal
-  dependencies, install other dependencies, and link in to your system.
-</p>
-<p>Quick instructions:</p>
+
+<h2>Setting up development environment</h2>
+
+<p>If you don't already have <a href="http://nodejs.org/">node.js</a> installed, install it on your system.</p>
+
+<p>The development environment is managed with a CLI, buster-dev-tools. Install it using the node.js package manager.</p>
+
+<pre>npm install -g buster-dev-tools</pre>
+
+<p>The tool will install all the buster packages to the folder you choose.</p>
+
 <pre>mkdir buster
 cd buster
-git clone git://gitorious.org/buster/buster-dev-tools.git
-node buster-dev-tools/update.js</pre>
-<p>To update:</p>
-<pre>node buster-dev-tools/update.js</pre>
+buster-dev-tools install</pre>
+
+<p>After some time you might want to update all the repos. To do so, use the <tt>update</tt> command.</p>
+
+<pre>cd buster
+buster-dev-tools update</pre>
+
+<p>You need to cd to the directory where the packages are installed in order to use buster-dev-tools.</p>
+
+<h2>Contribution guidelines</h2>
+
+<p class="warning">Note: this section is work-in-progress</p>
+
+<h3>Post questions to the busterjs-dev mailing list</h3>
+
+<p>The <a href="http://groups.google.com/group/busterjs-dev">busterjs-dev mailing list</a> is a place for general discussion regarding development of Buster.JS. In many cases you can just post an issue to <a href="https://github.com/busterjs/buster/issues">the issue tracker</a> and the discussion can happen there. But you can also discuss on the mailing list if you're more comfortable with that. For example, you might prefer to use e-mail for discussion, or you want to discuss your contribution before posting it to the issue tracker.</p>
+
+<h3>Always create an issue for your contribution</h3>
+
+<p>We probably won't notice your contribution if all you do is submit a pull request on Github. But we monitor <a href="https://github.com/busterjs/buster/issues">the issue tracker</a>, so you should always post an issue when you create a pull request on GitHub, a merge request on Gitorious, or e-mail us a patch. Just link to your pull request(s) and explain your contribution.</p>
+
+<p>Not creating pull requests are also fine. Create an issue and link to the feature branches and/or commits you want to contribute, be it on GitHub, Gitorious, or a link to a tarball of patches.</p>
+
+<h3>Coding style</h3>
+
+<p>We don't have one yet :)</p>
+
+<p>For now, look at some existing code to get an idea of what our code looks like.</p>
