@@ -72,6 +72,10 @@
   browser, version and platform. Only used for "friendly" browser names in
   test result reports, list of slaves and so on.
 </p>
+<ul>
+  <li>Status: Stable (new UA's occasionally added)</li>
+  <li><a href="http://github.com/busterjs/buster-user-agent-parser">Source code</a></li>
+</ul>
 <h2 id="terminal">buster-terminal</h2>
 <p>
   A small library for working with
@@ -81,6 +85,10 @@
   print multiple lines of output at once, e.g. when running tests on multiple
   browsers (the dots reporter).
 </p>
+<ul>
+  <li>Status: Stable, mostly complete</li>
+  <li><a href="http://github.com/busterjs/buster-terminal">Source code</a></li>
+</ul>
 <h2 id="analyzer">buster-analyzer</h2>
 <p>
   A simple and generic mechanism for flagging warnings. The analyzer is an event
@@ -97,6 +105,10 @@
   insight about your code. Examples of practical usage includes linting and
   syntax checking (for browser tests).
 </p>
+<ul>
+  <li>Status: In development, may change significantly</li>
+  <li><a href="http://github.com/busterjs/buster-analyzer">Source code</a></li>
+</ul>
 <h2 id="syntax">buster-syntax</h2>
 <p>
   A small extension that provides server-side syntax checking of scripts
@@ -106,6 +118,10 @@
   these errors in one place, and produce a pretty nice report, regardless of
   browser intended to run the tests.
 </p>
+<ul>
+  <li>Status: Stable, but integrates with <code>buster-analyzer</code>, which is not</li>
+  <li><a href="http://github.com/busterjs/buster-analyzer">Source code</a></li>
+</ul>
 <h2 id="core">buster-core</h2>
 <p>
   Somewhat arbitrary collection of functions used in several other buster
@@ -113,10 +129,18 @@
   limited flow-control utilities, and a few functional enhancements. Hopefully,
   we can get rid of this one day.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-core">Source code</a></li>
+</ul>
 <h2 id="assertions">buster-assertions</h2>
 <p>
   Assertions and expectations, for Buster.JS and everyone else.
 </p>
+<ul>
+  <li>Status: Stable, awaiting a few additions before 1.0</li>
+  <li><a href="http://github.com/busterjs/buster-assertions">Source code</a></li>
+</ul>
 <h2 id="format">buster-format</h2>
 <p>
   ASCII formatting of arbitrary JavaScript objects. This module is used to give
@@ -125,6 +149,10 @@
   (and <code>console.log</code>, if captured) and may be usde in more places
   later. Also intended for reuse outside of the Buster.JS sphere.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-format">Source code</a></li>
+</ul>
 <h2 id="evented-logger">buster-evented-logger</h2>
 <p>
   A logger-like utility that simply emits events. This is useful in any number
@@ -132,6 +160,10 @@
   buster-capture-server. In this case, we pass the events over the wire instead
   of printing them to the console.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-evented-logger">Source code</a></li>
+</ul>
 <h2 id="test">buster-test</h2>
 <p>
   Implements <code>testCase</code>, <code>describe</code> (and friends), the
@@ -140,12 +172,28 @@
   tests, and possibly more bags of tests. This is the shared data format
   produced by both the xUnit and BDD style tests/specs.
 </p>
+<ul>
+  <li>Status: May be split into several modules and/or renamed.</li>
+  <li><a href="http://github.com/busterjs/buster-test">Source code</a></li>
+</ul>
+<p>
+  The reason we're considering breaking up this module is that it includes parts
+  that are complete and unlikely to change (such as test case and spec
+  definitions, the context data format and the test runner) <strong>and</strong>
+  parts that are likely to change and/or have abilities added, such as
+  reporters. The name also indicates it is what powers the
+  <code>buster-test</code> binary, which is not true.
+</p>
 <h2 id="sinon-buster">buster-sinon-buster</h2>
 <p>
   Integrating Sinon.JS with buster. Adds Sinon-specific assertions, wires up
   Sinon.JS to use <code>buster-format</code> for error messages, adds automatic
   sandboxing/restoration of fakes for test cases and so on.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/sinon-buster">Source code</a></li>
+</ul>
 <h2 id="resources">buster-resources</h2>
 <p>
   Represents files in a project that may be included in a test run. For node,
@@ -160,6 +208,10 @@
   Resources typically map to files on disk, but really can be anything,
   including one-off strings in a configuration file.
 </p>
+<ul>
+  <li>Status: Stable, has a few known issues waiting to be fixed</li>
+  <li><a href="http://github.com/busterjs/buster-resources">Source code</a></li>
+</ul>
 <h2 id="capture-server">buster-capture-server</h2>
 <p>
   The capture server captures browsers as slaves, and offers a completely
@@ -172,6 +224,10 @@
   to accept and server resource sets, capture and command browser slaves, and
   coordinate every piece using messaging (Bayeux on the HTTP level).
 </p>
+<ul>
+  <li>Status: Unstable, currently undergoing API changes</li>
+  <li><a href="http://github.com/busterjs/buster-capture-server">Source code</a></li>
+</ul>
 <h2 id="bayeux-emitter">buster-bayeux-emitter</h2>
 <p>
   Given <code>subscribe</code> and <code>publish</code> methods, this module
@@ -183,18 +239,31 @@
   browser (via buster-capture-server) ship its progress events directly over
   the wire (which is a Bayeux wire).
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-bayeux-emitter">Source code</a></li>
+</ul>
 <h2 id="configuration">buster-configuration</h2>
 <p>
   Programmatic access to <code>buster.js</code> configuration files. Allows
   you to extract resourceSets (i.e. all the file names/contents), environment
   options, run extension hooks and filter out groups.
 </p>
+<ul>
+  <li>Status: Stable. Occasionally learns about new properties.</li>
+  <li><a href="http://github.com/busterjs/buster-configuration">Source code</a></li>
+</ul>
 <h2 id="client">buster-client</h2>
 <p>
-  <em>To be removed</em>. Implements a simple HTTP client for
-  buster-capture-server's HTTP API. Is used by buster-test-cli to configure
-  and create a session (remember, a generic work load, typically a test run).
+  <em>To be merged into buster-capture-server</em>. Implements a simple HTTP
+  client for buster-capture-server's HTTP API. Is used by buster-test-cli to
+  configure and create a session (remember, a generic work load, typically a
+  test run).
 </p>
+<ul>
+  <li>Status: Unstable, about to be merged into buster-capture-server</li>
+  <li><a href="http://github.com/busterjs/buster-client">Source code</a></li>
+</ul>
 <h2 id="args">buster-args</h2>
 <p>
   General-purpose command line argument parser. Only parses command line
@@ -202,18 +271,30 @@
   Also tries as best it can to adhere to UNIX conventions. Fails early
   (typically when using non-existent options ++).
 </p>
+<ul>
+  <li>Status: Stable, has a few known (API design) issues waiting to be fixed</li>
+  <li><a href="http://github.com/busterjs/buster-args">Source code</a></li>
+</ul>
 <h2 id="stdio-logger">buster-stdio-logger</h2>
 <p>
   Accepts a standard and error output stream, and returns a
   buster-evented-logger object that will print certains events directly to
   the passed-in stdout, and certain errors to stderr.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-stdio-logger">Source code</a></li>
+</ul>
 <h2 id="cli">buster-cli</h2>
 <p>
   Somewhat arbitrary collection of utilities useful to CLIs that aim to behave
   more or less like existing Buster.JS CLIs. Is used by buster-test-cli and
   buster-static.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-cli">Source code</a></li>
+</ul>
 <h2 id="test-cli">buster-test-cli</h2>
 <p>
   "The kitchen sink" behind <code>buster test</code>. Coordinates many other
@@ -221,33 +302,70 @@
   and running those groups. In charge of options passed to <code>buster test</code>,
   colored printing and so on.
 </p>
+<ul>
+  <li>Status: In development</li>
+  <li><a href="http://github.com/busterjs/buster-test-cli">Source code</a></li>
+</ul>
+<p>
+  This module is mostly stable, but is rapidly gaining features and extension
+  points. My gut feeling tells me that this module houses too many things, and
+  it will likely be broken up before we go 1.0.
+</p>
 <h2 id="static">buster-static</h2>
 <p>
   A small and (currently, too) simple/limited way of easily running tests
   directly in a browser (i.e. without buster-server). Builds scaffolding markup
   and serves tests on a simple server.
 </p>
+<ul>
+  <li>Status: Largely incomplete</li>
+  <li><a href="http://github.com/busterjs/buster-static">Source code</a></li>
+</ul>
 <h2 id="buster">buster</h2>
 <p>
   Meta-package that's the install target, thus carries quite a lot of
   dependencies. Includes some very rudimentary wiring across
   Buster-repositories.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster">Source code</a></li>
+</ul>
 <h2 id="util">buster-util</h2>
 <p>
   Contains a simple and ugly test runner that's used to test some of the more
   fundamental parts of Buster.JS.
 </p>
+<ul>
+  <li>Status: Stable, but will hopefully be removed down the line</li>
+  <li><a href="http://github.com/busterjs/buster-util">Source code</a></li>
+</ul>
 <h2 id="dev-tools">buster-dev-tools</h2>
 <p>
   Allows developers to set up their Buster.JS developmnent environment quickly
   and painlessly.
 </p>
+<ul>
+  <li>Status: In development, awaiting Windows support</li>
+  <li><a href="http://github.com/busterjs/buster-dev-tools">Source code</a></li>
+</ul>
 <h2 id="docs">buster-docs</h2>
 <p>
   You're reading them.
 </p>
+<ul>
+  <li>Status: Will never be "done"</li>
+  <li><a href="http://github.com/busterjs/buster-docs">Source code</a></li>
+</ul>
 <h2 id="jstestdriver">buster-jstestdriver</h2>
+<p>
+  An extension that allows Buster.JS to run JsTestDriver test suites, given
+  a configuration file Buster.JS understands.
+</p>
+<ul>
+  <li>Status: Stable, but lacks async test cases</li>
+  <li><a href="http://github.com/busterjs/buster-jstestdriver">Source code</a></li>
+</ul>
 <h2 id="html-doc">buster-html-doc</h2>
 <p>
   An extension that implements "markup-in-comments", using the
@@ -256,6 +374,10 @@
   in the <code>buster-jstestdriver</code> extension, but works well with
   vanilla Buster.JS test cases (and specs) too.
 </p>
+<ul>
+  <li>Status: Stable</li>
+  <li><a href="http://github.com/busterjs/buster-html-doc">Source code</a></li>
+</ul>
 <h2 id="lint">buster-lint</h2>
 <p>
   Extension that enables the integration of JsLint and JsHint by way of
@@ -267,6 +389,10 @@
   developed by
   <a href="https://github.com/magnars/buster-lint">Magnar Sveen</a>.
 </p>
+<ul>
+  <li>Status: Stable, but relies on buster-analyzer, which is not</li>
+  <li><a href="http://github.com/magnars/buster-lint">Source code</a></li>
+</ul>
 <h2 id="amd">buster-amd</h2>
 <p>
   <em>Work in progress</em>. Extension that will allow AMD projects to use
@@ -276,6 +402,10 @@
   using an AMD loader rather than simple script tags. Currently developed
   by <a href="https://github.com/johlrogge/buster-amd">Joakim Ohlrogge</a>.
 </p>
+<ul>
+  <li>Status: In development</li>
+  <li><a href="http://github.com/johlrogge/buster-amd">Source code</a></li>
+</ul>
 <h2 id="coverage">buster-coverage</h2>
 <p>
   <em>Work in progress</em>. Extension to calculate line coverage. Uses
@@ -283,3 +413,7 @@
   over the test runner to build up the report. Currently developed by
   <a href="https://github.com/ebi/coverage-helpers">Tobias Ebnöther</a>.
 </p>
+<ul>
+  <li>Status: In development</li>
+  <li><a href="https://github.com/ebi/coverage-helpers">Source code</a></li>
+</ul>
