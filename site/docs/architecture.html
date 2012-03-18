@@ -1,0 +1,254 @@
+<h1>Buster.JS Architecture overview</h1>
+<p>
+  Buster.JS consists of many small Git repositories/NPM modules. We try to keep
+  things small and separated. The repositories and installable modules both
+  promotes reusability (e.g. you can use <a href="http://cjohansen.no/using-buster-assertions-with-jstestdriver">Buster assertions with any test framework</a>)
+  and helps us avoid tight coupling between modules. However, some people feel
+  that the number of repositories are a bit daunting when trying to contribute.
+  This document sheds some light on existing modules, what they're for, and
+  what role they play in the bigger part.
+</p>
+<p>
+  Note that some of our modules contain stronger abstractions than others, and
+  the less obvious ones may very well change until we have something that we're
+  comfortable with. If you have suggestions for how certain modules can improve
+  (renaming/merging/splitting/refactoring/whatever),
+  <a href="http://groups.google.com/group/busterjs-dev">feel free to let us know</a>.
+</p>
+<h2>Buster.JS core modules</h2>
+<p>
+  Core modules are those that are installed when you type
+  <code>npm install buster</code>. They constitute the core of the test framework,
+  and contains everything you need to run node tests, simple browser tests and
+  automated crowd-sourced browser tests.
+</p>
+<ul>
+  <li><a href="#user-agent-parser">buster-user-agent-parser</a></li>
+  <li><a href="#terminal">buster-terminal</a></li>
+  <li><a href="#analyzer">buster-analyzer</a></li>
+  <li><a href="#syntax">buster-syntax</a></li>
+  <li><a href="#core">buster-core</a></li>
+  <li><a href="#assertions">buster-assertions</a></li>
+  <li><a href="#format">buster-format</a></li>
+  <li><a href="#evented-logger">buster-evented-logger</a></li>
+  <li><a href="#test">buster-test</a></li>
+  <li><a href="#sinon-buster">sinon-buster</a></li>
+  <li><a href="#resources">buster-resources</a></li>
+  <li><a href="#capture-server">buster-capture-server</a></li>
+  <li><a href="#bayeux-emitter">buster-bayeux-emitter</a></li>
+  <li><a href="#configuration">buster-configuration</a></li>
+  <li><a href="#client">buster-client</a></li>
+  <li><a href="#args">buster-args</a></li>
+  <li><a href="#stdio-logger">buster-stdio-logger</a></li>
+  <li><a href="#cli">buster-cli</a></li>
+  <li><a href="#test-cli">buster-test-cli</a></li>
+  <li><a href="#static">buster-static</a></li>
+  <li><a href="#buster">buster</a></li>
+</ul>
+<h2>Buster.JS auxilliary modules</h2>
+<p>
+  Developer tools and other.
+</p>
+<ul>
+  <li><a href="#util">buster-util</a></li>
+  <li><a href="#dev-tools">buster-dev-tools</a></li>
+  <li><a href="#docs">buster-docs</a></li>
+</ul>
+<h2>Buster.JS extensions and optional modules</h2>
+<p>
+  These modules provide additional features for Buster.JS, such as linting,
+  JsTestDriver support and more.
+</p>
+<ul>
+  <li><a href="#amd">buster-amd</a></li>
+  <li><a href="#coverage">buster-coverage</a></li>
+  <li><a href="#html-doc">buster-html-doc</a></li>
+  <li><a href="#jstestdriver">buster-jstestdriver</a></li>
+  <li><a href="#lint">buster-lint</a></li>
+</ul>
+<h2 id="user-agent-parser">buster-user-agent-parser</h2>
+<p>
+  A generic user-agent parser that does a best-effort attempt at extracting
+  browser, version and platform. Only used for "friendly" browser names in
+  test result reports, list of slaves and so on.
+</p>
+<h2 id="terminal">buster-terminal</h2>
+<p>
+  A small library for working with
+  <a href="http://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape
+  sequences</a> in the terminal. Mostly used for colored output, and positional
+  output. Also includes a "labeled list" object that is used to progressively
+  print multiple lines of output at once, e.g. when running tests on multiple
+  browsers (the dots reporter).
+</p>
+<h2 id="analyzer">buster-analyzer</h2>
+<p>
+  A simple and generic mechanism for flagging warnings. The analyzer is an event
+  emitter, and provides <code>fatal</code>, <code>error</code> and
+  <code>warning</code> methods, which emit corresponding events. Additionally,
+  the analyzer has a concept of ok/not ok. This is decided from a threshold
+  (i.e., a threshold of "error" means "not ok" if any error or fatal events where
+  flagged).
+</p>
+<p>
+  The analyzer also comes with a reporter which can be used to log events of
+  interest. The analyzer and the reporter is used by
+  <a href="#test-cli">buster-test-cli</a> and extensions to provide various
+  insight about your code. Examples of practical usage includes linting and
+  syntax checking (for browser tests).
+</p>
+<h2 id="syntax">buster-syntax</h2>
+<p>
+  A small extension that provides server-side syntax checking of scripts
+  sent for testing with buster-capture-server. When Buster.JS loads scripts in
+  browsers, the browser in question will be the one responsible for the level
+  of detail when errors arise, Syntax checking on the server allows us to catch
+  these errors in one place, and produce a pretty nice report, regardless of
+  browser intended to run the tests.
+</p>
+<h2 id="core">buster-core</h2>
+<p>
+  Somewhat arbitrary collection of functions used in several other buster
+  modules. Includes the event emitter implementation used throughout, some
+  limited flow-control utilities, and a few functional enhancements. Hopefully,
+  we can get rid of this one day.
+</p>
+<h2 id="assertions">buster-assertions</h2>
+<p>
+  Assertions and expectations, for Buster.JS and everyone else.
+</p>
+<h2 id="format">buster-format</h2>
+<p>
+  ASCII formatting of arbitrary JavaScript objects. This module is used to give
+  pretty feedback in certain cases. It is used to format objects in assertion
+  error messages, to format objects passed to <code>buster.log</code>
+  (and <code>console.log</code>, if captured) and may be usde in more places
+  later. Also intended for reuse outside of the Buster.JS sphere.
+</p>
+<h2 id="evented-logger">buster-evented-logger</h2>
+<p>
+  A logger-like utility that simply emits events. This is useful in any number
+  of cases, most importantly when running tests in browsers via
+  buster-capture-server. In this case, we pass the events over the wire instead
+  of printing them to the console.
+</p>
+<h2 id="test">buster-test</h2>
+<p>
+  Implements <code>testCase</code>, <code>describe</code> (and friends), the
+  actual test runner, reporters and supporting objects. <code>buster-test</code>
+  is centered around the concept of "test contexts", which is just a bag of
+  tests, and possibly more bags of tests. This is the shared data format
+  produced by both the xUnit and BDD style tests/specs.
+</p>
+<h2 id="sinon-buster">buster-sinon-buster</h2>
+<p>
+  Integrating Sinon.JS with buster. Adds Sinon-specific assertions, wires up
+  Sinon.JS to use <code>buster-format</code> for error messages, adds automatic
+  sandboxing/restoration of fakes for test cases and so on.
+</p>
+<h2 id="resources">buster-resources</h2>
+<p>
+  Represents files in a project that may be included in a test run. For node,
+  Buster.JS only uses resources to look up which paths to <code>require</code>.
+  For browsers, Buster.JS uses <code>buster-resources</code> to build a virtual
+  file system, send it over HTTP and mount it on the server. All of these
+  components are available in this module.
+</p>
+<p>
+  <code>buster-resources</code> also includes intelligent caching of resources
+  to allow test runs that only reads changed tests from file and so on.
+  Resources typically map to files on disk, but really can be anything,
+  including one-off strings in a configuration file.
+</p>
+<h2 id="capture-server">buster-capture-server</h2>
+<p>
+  The capture server captures browsers as slaves, and offers a completely
+  generic API for carrying out work across those slaves. A workload is known as
+  a "session", and a test run is typically a session. Other uses include for
+  instance synced-across-devices slide shows (for which a POC has been built).
+</p>
+<p>
+  In general, the server knows nothing specifically of testing. It knows how
+  to accept and server resource sets, capture and command browser slaves, and
+  coordinate every piece using messaging (Bayeux on the HTTP level).
+</p>
+<h2 id="bayeux-emitter">buster-bayeux-emitter</h2>
+<p>
+  Given <code>subscribe</code> and <code>publish</code> methods, this module
+  produces an object that looks and behaves like an event emitter (i.e. no
+  specific requirements on event names and so on).
+</p>
+<p>
+  Specifically, the bayeux emitter is used to allow the test runner in the
+  browser (via buster-capture-server) ship its progress events directly over
+  the wire (which is a Bayeux wire).
+</p>
+<h2 id="configuration">buster-configuration</h2>
+<p>
+  Programmatic access to <code>buster.js</code> configuration files. Allows
+  you to extract resourceSets (i.e. all the file names/contents), environment
+  options, run extension hooks and filter out groups.
+</p>
+<h2 id="client">buster-client</h2>
+<p>
+  <em>To be removed</em>. Implements a simple HTTP client for
+  buster-capture-server's HTTP API. Is used by buster-test-cli to configure
+  and create a session (remember, a generic work load, typically a test run).
+</p>
+<h2 id="args">buster-args</h2>
+<p>
+  General-purpose command line argument parser. Only parses command line
+  options, no printing to the console, no --help generation, no flow control.
+  Also tries as best it can to adhere to UNIX conventions. Fails early
+  (typically when using non-existent options ++).
+</p>
+<h2 id="stdio-logger">buster-stdio-logger</h2>
+<p>
+  Accepts a standard and error output stream, and returns a
+  buster-evented-logger object that will print certains events directly to
+  the passed-in stdout, and certain errors to stderr.
+</p>
+<h2 id="cli">buster-cli</h2>
+<p>
+  Somewhat arbitrary collection of utilities useful to CLIs that aim to behave
+  more or less like existing Buster.JS CLIs. Is used by buster-test-cli and
+  buster-static.
+</p>
+<h2 id="test-cli">buster-test-cli</h2>
+<p>
+  "The kitchen sink" behind <code>buster test</code>. Coordinates many other
+  modules to read configuration file, loop all matching groups, creating runners
+  and running those groups. In charge of options passed to <code>buster test</code>,
+  colored printing and so on.
+</p>
+<h2 id="static">buster-static</h2>
+<p>
+  A small and (currently, too) simple/limited way of easily running tests
+  directly in a browser (i.e. without buster-server). Builds scaffolding markup
+  and serves tests on a simple server.
+</p>
+<h2 id="buster">buster</h2>
+<p>
+  Meta-package that's the install target, thus carries quite a lot of
+  dependencies. Includes some very rudimentary wiring across
+  Buster-repositories.
+</p>
+<h2 id="util">buster-util</h2>
+<p>
+  Contains a simple and ugly test runner that's used to test some of the more
+  fundamental parts of Buster.JS.
+</p>
+<h2 id="dev-tools">buster-dev-tools</h2>
+<p>
+  Allows developers to set up their Buster.JS developmnent environment quickly
+  and painlessly.
+</p>
+<h2 id="docs">buster-docs</h2>
+<p>
+  You're reading them.
+</p>
+<h2 id="amd">buster-amd</h2>
+<h2 id="coverage">buster-coverage</h2>
+<h2 id="html-doc">buster-html-doc</h2>
+<h2 id="jstestdriver">buster-jstestdriver</h2>
+<h2 id="lint">buster-lint</h2>
