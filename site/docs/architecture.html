@@ -247,8 +247,39 @@
 <p>
   You're reading them.
 </p>
-<h2 id="amd">buster-amd</h2>
-<h2 id="coverage">buster-coverage</h2>
-<h2 id="html-doc">buster-html-doc</h2>
 <h2 id="jstestdriver">buster-jstestdriver</h2>
+<h2 id="html-doc">buster-html-doc</h2>
+<p>
+  An extension that implements "markup-in-comments", using the
+  <code>/*:DOC el = ... */</code> format originally found in JsTestDriver.
+  The extension was originally developed to be API compatible with JsTestDriver
+  in the <code>buster-jstestdriver</code> extension, but works well with
+  vanilla Buster.JS test cases (and specs) too.
+</p>
 <h2 id="lint">buster-lint</h2>
+<p>
+  Extension that enables the integration of JsLint and JsHint by way of
+  <a href="https://github.com/magnars/autolint">autolint</a>. Using the
+  <code>buster-analyzer</code> module, the lint extension is able to flag
+  lint errors as "error" in buster. This allows the end-user to choose if
+  lint errors should only be printed as warnings, or actually fail the build
+  (which can be achieved with <code>buster test -F error</code>). Currently
+  developed by
+  <a href="https://github.com/magnars/buster-lint">Magnar Sveen</a>.
+</p>
+<h2 id="amd">buster-amd</h2>
+<p>
+  <em>Work in progress</em>. Extension that will allow AMD projects to use
+  Buster.JS without any specific configuration. It modifies the load path
+  of the <code>resourceSet</code> used to represent user files and creates
+  an anonymous AMD module that depends on all tests, thus loading files
+  using an AMD loader rather than simple script tags. Currently developed
+  by <a href="https://github.com/johlrogge/buster-amd">Joakim Ohlrogge</a>.
+</p>
+<h2 id="coverage">buster-coverage</h2>
+<p>
+  <em>Work in progress</em>. Extension to calculate line coverage. Uses
+  the <code>resourceSet</code> to instrument code, and emits custom messages
+  over the test runner to build up the report. Currently developed by
+  <a href="https://github.com/ebi/coverage-helpers">Tobias Ebnöther</a>.
+</p>
