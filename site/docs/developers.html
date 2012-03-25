@@ -32,6 +32,31 @@ buster-dev-tools update</pre>
 
 <p>You need to cd to the directory where the packages are installed in order to use buster-dev-tools.</p>
 
+<h2 id="docs">Running the documentation server</h2>
+
+<p>
+  To contribute docs, you will need to run the very simple docs server. To edit
+  docs, you only need to know HTML. Here's how to get started:
+</p>
+<pre><code>git clone https://github.com/busterjs/buster-docs.git
+cd buster-docs
+npm install
+node bin/server</code></pre>
+<p>
+  Now you can visit the docs on <a href="http://localhost:8090/">http://localhost:8090/</a>.
+  The docs server simply combines docs pages with the <a href="https://github.com/busterjs/buster-docs/blob/master/layout.html">layout file</a>.
+</p>
+<p>
+  URL mapping is very simple. Anything in <code>site/*.html</code> is available
+  over the server as http://localhost:8090/*/. For instance, this page, whose
+  (relative) URL is <a href="/docs/developers/">/docs/developers/</a> is
+  generated from the file <a href="https://github.com/busterjs/buster-docs/blob/master/site/docs/developers.html">site/docs/developers.html</a>.
+</p>
+<p>
+  You can make a static version of the site by running
+  <code>node bin/build</code> (requires a running docs server).
+</p>
+
 <h2>Contribution guidelines</h2>
 
 <p class="warning">Note: this section is work-in-progress</p>
