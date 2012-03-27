@@ -39,7 +39,9 @@ config["Browser tests"] = {
 };</code></pre>
 <h3 id="amd">buster-amd</h3>
 <p>
-  Use an AMD loader to test asynchronous modules.
+  Use an AMD loader to test asynchronous modules. You must provide your own
+  loader. By default, a loader that provides <code>require(deps, callback)</code>
+  is assumed. This will eventually be pluggable.
 </p>
 <h4>Install</h4>
 <p><code>npm install buster-amd</code></p>
@@ -53,6 +55,17 @@ config["Browser tests"] = {
     tests: ["test/**/*.js"],
     extensions: [require("buster-amd")]
 };</code></pre>
+<p>
+  Note that you list your tests and sources as normal. Your sources must be
+  specified in the configuration even if you will <code>require</code> them from
+  your tests, otherwise, Buster will not make them available on the test server.
+</p>
+<p>
+  Your tests will drive the show. To run tests with the AMD extension, your
+  tests should be wrapped in a call to <code>define</code>, which pulls in
+  dependencies (i.e. your modules) and in the callback defines specs/test cases
+  as usual.
+</p>
 <h4>Configure</h4>
 <p>
   The AMD extension has one configuration option: a path mapper. The path mapper
