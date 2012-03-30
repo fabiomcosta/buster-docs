@@ -10,25 +10,25 @@
 
 <p>The development environment is managed with a CLI, buster-dev-tools. Install it using the node.js package manager.</p>
 
-<pre>npm install -g buster-dev-tools</pre>
+<pre><code>npm install -g buster-dev-tools</code></pre>
 
 <p>The tool will install all the buster packages to the folder you choose.</p>
 
-<pre>mkdir buster
+<pre><code>mkdir buster
 cd buster
-buster-dev-tools install</pre>
+buster-dev-tools install</code></pre>
 
 <p>You also need to set some environment variables. <tt>{path to buster}</tt> is the path to the folder where you ran <tt>buster-dev-tools install</tt>.</p>
 
-<pre>NODE_PATH={path to buster}
-PATH={path to buster}/buster/bin:$PATH</pre>
+<pre><code>NODE_PATH={path to buster}
+PATH={path to buster}/buster/bin:$PATH</code></pre>
 
 <h3>Refreshing all repositories</h3>
 
 <p>After some time you might want to update all the repos. To do so, use the <tt>update</tt> command.</p>
 
-<pre>cd buster
-buster-dev-tools update</pre>
+<pre><code>cd buster
+buster-dev-tools update</code></pre>
 
 <p>You need to cd to the directory where the packages are installed in order to use buster-dev-tools.</p>
 
